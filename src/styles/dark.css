@@ -1,0 +1,72 @@
+/* Dark theme variables */
+.app.dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #252525;
+  --bg-tertiary: #333333;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted: #808080;
+  --border-color: #404040;
+  --accent-color: #4a9fff;
+  --accent-hover: #3d8adb;
+  --danger-color: #e74c3c;
+  --danger-hover: #c0392b;
+  --input-bg: #2a2a2a;
+  --input-border: #404040;
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
+/* Dark theme specific overrides */
+.app.dark .input-group input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+.app.dark .input-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(74, 159, 255, 0.2);
+}
+
+.app.dark .setting-control select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+.app.dark .toolbar-btn {
+  background: transparent;
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.app.dark .toolbar-btn:hover {
+  background: var(--bg-tertiary);
+}
+
+.app.dark .settings-back-btn {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.app.dark .settings-back-btn:hover {
+  background: var(--bg-tertiary);
+}
+
+.app.dark .modal-actions button:first-child {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.app.dark .modal-actions button:first-child:hover {
+  background: var(--bg-tertiary);
+}
+
+.app.dark .loading-spinner {
+  border-color: var(--bg-tertiary);
+  border-top-color: var(--accent-color);
+}
+
+.app.dark .update-notice {
+  background: var(--bg-tertiary);
+}

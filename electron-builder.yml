@@ -1,0 +1,56 @@
+appId: com.mattermost.desktop-react
+productName: Mattermost
+copyright: Copyright © 2024
+
+directories:
+  output: dist
+  buildResources: build
+
+files:
+  - build/**/*
+  - electron/**/*
+  - Icon/**/*
+  - node_modules/**/*
+  - package.json
+
+extraMetadata:
+  main: electron/main.js
+
+win:
+  target:
+    - nsis
+    - portable
+  icon: build/icon.png
+  artifactName: ${productName}-Setup-${version}.${ext}
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+
+portable:
+  artifactName: ${productName}-Portable-${version}.${ext}
+
+# Auto-update configuration
+# To enable auto-updates, replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME
+# with your actual GitHub username and repository name
+publish:
+  provider: github
+  owner: YOUR_GITHUB_USERNAME
+  repo: YOUR_REPO_NAME
+  releaseType: release
+
+# Optional: Mac configuration (for future use)
+mac:
+  target:
+    - dmg
+    - zip
+  icon: Icon/Mattermost_icon_denim@2x.png
+  category: public.app-category.productivity
+
+# Optional: Linux configuration (for future use)
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: Icon
+  category: Network
