@@ -43,7 +43,7 @@ function App() {
       });
 
       window.electronAPI.onUpdateError && window.electronAPI.onUpdateError((message) => {
-        setUpdateInfo({ status: 'error', message });
+        setUpdateInfo(prev => ({ ...prev, status: 'error', message }));
       });
     }
   }, []);

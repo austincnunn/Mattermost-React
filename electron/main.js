@@ -290,11 +290,15 @@ autoUpdater.on('update-downloaded', (info) => {
 autoUpdater.on('error', (error) => {
   console.error('Auto-updater error:', error);
   // Send a clean, user-friendly error message
-  let message = 'Could not check for updates';
+  let message = 'Something went wrong';
   if (error.message?.includes('Unable to find latest version')) {
-    message = 'No releases found. Make sure a published release exists on GitHub.';
+    message = 'No releases found. Make sure latest.yml is uploaded to the GitHub release.';
   } else if (error.message?.includes('net::')) {
     message = 'Network error. Please check your internet connection.';
+  } else if (error.message?.includes('sha512 checksum mismatch')) {
+    message = 'Download verification failed. The release files may be corrupted.';
+  } else if (error.message?.includes('Cannot download')) {
+    message = 'Download failed. Please try again.';
   }
   mainWindow?.webContents.send('update-error', message);
 });

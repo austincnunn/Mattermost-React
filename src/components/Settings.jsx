@@ -186,10 +186,16 @@ function Settings({ onClose, onChangeServer, onClearData, updateInfo }) {
 
           {updateInfo?.status === 'error' && (
             <div className="update-notice error">
-              <p>Update check failed: {updateInfo.message}</p>
-              <button onClick={handleCheckUpdate} className="setting-btn">
-                Try Again
-              </button>
+              <p>{updateInfo.version ? `Download failed: ${updateInfo.message}` : `Update check failed: ${updateInfo.message}`}</p>
+              {updateInfo.version ? (
+                <button onClick={handleDownloadUpdate} className="setting-btn">
+                  Retry Download
+                </button>
+              ) : (
+                <button onClick={handleCheckUpdate} className="setting-btn">
+                  Try Again
+                </button>
+              )}
             </div>
           )}
 

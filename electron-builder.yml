@@ -21,14 +21,14 @@ win:
     - nsis
     - portable
   icon: Icon/mattermost.ico
-  artifactName: ${productName}-Setup-${version}.${ext}
+  artifactName: MattermostReact-Setup-${version}.${ext}
 
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
 
 portable:
-  artifactName: ${productName}-Portable-${version}.${ext}
+  artifactName: MattermostReact-Portable-${version}.${ext}
 
 # Auto-update configuration
 # To enable auto-updates, replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME
