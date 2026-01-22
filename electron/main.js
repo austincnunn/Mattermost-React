@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, Notification, Menu, clipboard } = require('electron');
+const { app, BrowserWindow, ipcMain, nativeTheme, Notification, Menu, clipboard, shell } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 const { autoUpdater } = require('electron-updater');
@@ -359,6 +359,30 @@ ipcMain.handle('download-update', () => {
 ipcMain.handle('install-update', () => {
   isQuitting = true;
   autoUpdater.quitAndInstall();
+});
+
+// Handle external links from webviews - open in default browser
+app.on('web-contents-created', (event, contents) => {
+  // Handle webview contents
+  if (contents.getType() === 'webview') {
+    contents.setWindowOpenHandler(({ url }) => {
+      // Check if URL should stay in the app (cad3.club without subdomains)
+      try {
+        const parsedUrl = new URL(url);
+        if (parsedUrl.hostname === 'cad3.club') {
+          // Navigate within the webview instead of opening new window
+          contents.loadURL(url);
+          return { action: 'deny' };
+        }
+      } catch {
+        // Invalid URL
+      }
+
+      // Open external URLs in default browser
+      shell.openExternal(url);
+      return { action: 'deny' };
+    });
+  }
 });
 
 // App lifecycle

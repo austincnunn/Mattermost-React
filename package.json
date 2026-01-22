@@ -1,6 +1,6 @@
 {
   "name": "mattermost-react",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Mattermost desktop client built with Electron and React",
   "author": "austincnunn",
   "main": "electron/main.js",
@@ -12,7 +12,8 @@
     "electron-start": "electron .",
     "build": "vite build && electron-builder",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "release": "node release.js"
   },
   "build": {
     "extends": "electron-builder.yml"
