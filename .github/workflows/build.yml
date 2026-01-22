@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --win
+        run: npm run build -- --win --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -33,6 +33,7 @@ jobs:
           name: windows-build
           path: |
             dist/*.exe
+            dist/*.blockmap
             dist/latest.yml
 
   build-linux:
@@ -51,7 +52,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --linux
+        run: npm run build -- --linux --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
