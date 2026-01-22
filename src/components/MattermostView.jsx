@@ -48,8 +48,33 @@ function MattermostView({ serverUrl, onOpenSettings }) {
 
     const handleNewWindow = (event) => {
       event.preventDefault();
+
+      // Check if the URL should stay in the app (cad3.club without subdomains)
+      try {
+        const url = new URL(event.url);
+        if (url.hostname === 'cad3.club') {
+          // Navigate within the webview
+          webview.src = event.url;
+          return;
+        }
+      } catch {
+        // Invalid URL, open externally
+      }
+
       // Open external links in system browser
-      window.open(event.url, '_blank');
+      if (window.electronAPI?.openExternal) {
+        window.electronAPI.openExternal(event.url);
+      }
+    };
+
+    const handleContextMenu = (event) => {
+      if (window.electronAPI?.showContextMenu) {
+        window.electronAPI.showContextMenu({
+          selectionText: event.params.selectionText,
+          isEditable: event.params.isEditable,
+          linkURL: event.params.linkURL
+        });
+      }
     };
 
     webview.addEventListener('dom-ready', handleDomReady);
@@ -58,6 +83,7 @@ function MattermostView({ serverUrl, onOpenSettings }) {
     webview.addEventListener('console-message', handleConsoleMessage);
     webview.addEventListener('ipc-message', handleIpcMessage);
     webview.addEventListener('new-window', handleNewWindow);
+    webview.addEventListener('context-menu', handleContextMenu);
 
     return () => {
       webview.removeEventListener('dom-ready', handleDomReady);
@@ -66,6 +92,7 @@ function MattermostView({ serverUrl, onOpenSettings }) {
       webview.removeEventListener('console-message', handleConsoleMessage);
       webview.removeEventListener('ipc-message', handleIpcMessage);
       webview.removeEventListener('new-window', handleNewWindow);
+      webview.removeEventListener('context-menu', handleContextMenu);
     };
   }, [serverUrl]);
 

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, nativeTheme, Notification, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, nativeTheme, Notification, Menu, clipboard } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
 const { autoUpdater } = require('electron-updater');
@@ -249,6 +249,41 @@ ipcMain.handle('set-badge', (event, count) => {
 
 ipcMain.handle('get-system-theme', () => {
   return nativeTheme.shouldUseDarkColors ? 'dark' : 'light';
+});
+
+// Context menu for webview
+ipcMain.handle('show-context-menu', (event, params) => {
+  const menuItems = [];
+
+  if (params.selectionText) {
+    menuItems.push({
+      label: 'Copy',
+      click: () => clipboard.writeText(params.selectionText)
+    });
+  }
+
+  if (params.isEditable) {
+    if (menuItems.length > 0) menuItems.push({ type: 'separator' });
+    menuItems.push(
+      { label: 'Cut', click: () => event.sender.cut() },
+      { label: 'Paste', click: () => event.sender.paste() },
+      { type: 'separator' },
+      { label: 'Select All', click: () => event.sender.selectAll() }
+    );
+  }
+
+  if (params.linkURL) {
+    if (menuItems.length > 0) menuItems.push({ type: 'separator' });
+    menuItems.push({
+      label: 'Copy Link',
+      click: () => clipboard.writeText(params.linkURL)
+    });
+  }
+
+  if (menuItems.length > 0) {
+    const menu = Menu.buildFromTemplate(menuItems);
+    menu.popup({ window: mainWindow });
+  }
 });
 
 // Listen for system theme changes

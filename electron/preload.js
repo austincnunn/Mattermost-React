@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, shell } = require('electron');
 
 // Expose protected methods to the renderer process
 contextBridge.exposeInMainWorld('electronAPI', {
@@ -56,7 +56,17 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
   onWebviewReload: (callback) => {
     ipcRenderer.on('webview-reload', () => callback());
-  }
+  },
+
+  // Open external URLs in system browser
+  openExternal: (url) => {
+    if (url && (url.startsWith('https://') || url.startsWith('http://'))) {
+      shell.openExternal(url);
+    }
+  },
+
+  // Show context menu
+  showContextMenu: (params) => ipcRenderer.invoke('show-context-menu', params)
 });
 
 // Inject notification interceptor script for webview
