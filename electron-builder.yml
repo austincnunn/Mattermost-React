@@ -1,6 +1,6 @@
 appId: com.mattermost.desktop-react
 productName: Mattermost
-copyright: Copyright © 2024
+copyright: Copyright © 2026
 
 directories:
   output: dist
@@ -35,8 +35,8 @@ portable:
 # with your actual GitHub username and repository name
 publish:
   provider: github
-  owner: YOUR_GITHUB_USERNAME
-  repo: YOUR_REPO_NAME
+  owner: austincnunn
+  repo: Mattermost-React
   releaseType: release
 
 # Optional: Mac configuration (for future use)

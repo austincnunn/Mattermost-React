@@ -85,36 +85,6 @@ publish:
 | `F11` | Toggle Fullscreen |
 | `Ctrl+Shift+I` | Toggle DevTools |
 
-## Project Structure
-
-```
-mattermost-react/
-├── electron/
-│   ├── main.js          # Main process (window, menu, IPC)
-│   ├── preload.js       # IPC bridge for renderer
-│   └── tray.js          # System tray management
-├── src/
-│   ├── index.jsx        # React entry point
-│   ├── App.jsx          # Main app component
-│   ├── components/
-│   │   ├── ServerSetup.jsx    # Server URL input
-│   │   ├── MattermostView.jsx # Webview container
-│   │   └── Settings.jsx       # Settings page
-│   ├── contexts/
-│   │   └── ThemeContext.jsx   # Theme management
-│   ├── hooks/
-│   │   └── useSettings.js     # Settings hook
-│   └── styles/
-│       ├── light.css    # Light theme
-│       └── dark.css     # Dark theme
-├── Icon/                # App icons (various formats)
-├── public/              # Static assets
-├── index.html           # HTML template
-├── vite.config.js       # Vite configuration
-├── electron-builder.yml # Build configuration
-└── package.json
-```
-
 ## Technology Stack
 
 - **[Electron](https://www.electronjs.org/)** - Desktop application framework
@@ -159,25 +129,6 @@ Build artifacts are placed in the `dist/` folder:
 2. Run `npm run build`
 3. Upload the installer to GitHub Releases
 4. Users with auto-update enabled will receive the update automatically
-
-## Troubleshooting
-
-### GPU Cache Errors in Development
-```
-Unable to move the cache: Access is denied
-```
-This is harmless in development. Clear the app data if persistent:
-```powershell
-Remove-Item -Recurse -Force "$env:APPDATA\mattermost-react"
-```
-
-### Notifications Not Showing
-1. Check Windows Settings → System → Notifications
-2. Find "Electron" (dev) or "Mattermost" (production) in the app list
-3. Enable "Show notification banners"
-
-### Build Fails with Symlink Error
-Enable Developer Mode in Windows (see [Prerequisites](#prerequisites-1)).
 
 ## License
 
