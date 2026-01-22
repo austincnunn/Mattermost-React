@@ -44,7 +44,8 @@ mac:
   target:
     - dmg
     - zip
-  icon: Icon/Mattermost_icon_denim@2x.png
+  icon: Icon/mattermost_icon_new.png
+  artifactName: MattermostReact-${version}.${ext}
   category: public.app-category.productivity
 
 # Optional: Linux configuration (for future use)
@@ -52,5 +53,6 @@ linux:
   target:
     - AppImage
     - deb
-  icon: Icon
+  icon: Icon/mattermost_icon_new.png
+  artifactName: MattermostReact-${version}.${ext}
   category: Network
