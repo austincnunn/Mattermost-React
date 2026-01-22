@@ -37,6 +37,14 @@ function App() {
       window.electronAPI.onUpdateDownloaded && window.electronAPI.onUpdateDownloaded((info) => {
         setUpdateInfo({ status: 'downloaded', ...info });
       });
+
+      window.electronAPI.onUpdateNotAvailable && window.electronAPI.onUpdateNotAvailable(() => {
+        setUpdateInfo({ status: 'up-to-date' });
+      });
+
+      window.electronAPI.onUpdateError && window.electronAPI.onUpdateError((message) => {
+        setUpdateInfo({ status: 'error', message });
+      });
     }
   }, []);
 

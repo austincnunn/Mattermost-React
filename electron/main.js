@@ -273,6 +273,18 @@ autoUpdater.on('update-downloaded', (info) => {
 
 autoUpdater.on('error', (error) => {
   console.error('Auto-updater error:', error);
+  // Send a clean, user-friendly error message
+  let message = 'Could not check for updates';
+  if (error.message?.includes('Unable to find latest version')) {
+    message = 'No releases found. Make sure a published release exists on GitHub.';
+  } else if (error.message?.includes('net::')) {
+    message = 'Network error. Please check your internet connection.';
+  }
+  mainWindow?.webContents.send('update-error', message);
+});
+
+autoUpdater.on('update-not-available', (info) => {
+  mainWindow?.webContents.send('update-not-available', info);
 });
 
 ipcMain.handle('check-for-updates', async () => {

@@ -1,7 +1,8 @@
 {
   "name": "mattermost-react",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Mattermost desktop client built with Electron and React",
+  "author": "austincnunn",
   "main": "electron/main.js",
   "scripts": {
     "start": "concurrently \"npm run vite-dev\" \"wait-on http://localhost:5173 && cross-env ELECTRON_START_URL=http://localhost:5173 electron .\"",

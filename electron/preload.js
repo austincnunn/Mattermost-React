@@ -32,6 +32,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
   onUpdateDownloaded: (callback) => {
     ipcRenderer.on('update-downloaded', (event, info) => callback(info));
   },
+  onUpdateNotAvailable: (callback) => {
+    ipcRenderer.on('update-not-available', (event, info) => callback(info));
+  },
+  onUpdateError: (callback) => {
+    ipcRenderer.on('update-error', (event, message) => callback(message));
+  },
 
   // Remove listeners (for cleanup)
   removeAllListeners: (channel) => {

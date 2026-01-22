@@ -175,6 +175,24 @@ function Settings({ onClose, onChangeServer, onClearData, updateInfo }) {
             </div>
           )}
 
+          {updateInfo?.status === 'up-to-date' && (
+            <div className="update-notice success">
+              <p>You're up to date!</p>
+              <button onClick={handleCheckUpdate} className="setting-btn">
+                Check Again
+              </button>
+            </div>
+          )}
+
+          {updateInfo?.status === 'error' && (
+            <div className="update-notice error">
+              <p>Update check failed: {updateInfo.message}</p>
+              <button onClick={handleCheckUpdate} className="setting-btn">
+                Try Again
+              </button>
+            </div>
+          )}
+
           {!updateInfo && (
             <div className="setting-item">
               <button
