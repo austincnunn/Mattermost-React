@@ -56,3 +56,4 @@ linux:
   icon: Icon/mattermost_icon_new.png
   artifactName: MattermostReact-${version}.${ext}
   category: Network
+  maintainer: 20135499+austincnunn@users.noreply.github.com
