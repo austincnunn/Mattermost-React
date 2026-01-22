@@ -1,6 +1,6 @@
 {
   "name": "mattermost-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Mattermost desktop client built with Electron and React",
   "author": "austincnunn",
   "main": "electron/main.js",
