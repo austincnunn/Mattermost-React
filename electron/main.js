@@ -265,6 +265,22 @@ autoUpdater.autoInstallOnAppQuit = true;
 
 autoUpdater.on('update-available', (info) => {
   mainWindow?.webContents.send('update-available', info);
+
+  const notification = new Notification({
+    title: 'Update Available',
+    body: `Mattermost React v${info.version} is available. Click to view.`,
+    icon: path.join(__dirname, '..', 'Icon', 'mattermost.ico')
+  });
+
+  notification.on('click', () => {
+    if (mainWindow) {
+      mainWindow.show();
+      mainWindow.focus();
+      mainWindow.webContents.send('navigate-to-settings');
+    }
+  });
+
+  notification.show();
 });
 
 autoUpdater.on('update-downloaded', (info) => {
