@@ -27,9 +27,7 @@ function isTaskbarDark() {
 }
 
 function getIconPath(isDark) {
-  // Use white icon for dark taskbar, black icon for light taskbar (for visibility)
-  const iconName = isDark ? 'Mattermost_icon_white@2x.png' : 'Mattermost_icon_black@2x.png';
-  return path.join(__dirname, '..', 'Icon', iconName);
+  return path.join(__dirname, '..', 'Icon', 'mattermost.ico');
 }
 
 function createTray(window, settingsStore) {

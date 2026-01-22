@@ -20,7 +20,7 @@ win:
   target:
     - nsis
     - portable
-  icon: build/icon.png
+  icon: Icon/mattermost.ico
   artifactName: ${productName}-Setup-${version}.${ext}
 
 nsis:

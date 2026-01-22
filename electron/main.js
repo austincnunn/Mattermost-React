@@ -107,9 +107,7 @@ function createMenu() {
 }
 
 function getTaskbarIconPath() {
-  const isDark = isTaskbarDark();
-  const iconName = isDark ? 'Mattermost_icon_white@2x.png' : 'Mattermost_icon_black@2x.png';
-  return path.join(__dirname, '..', 'Icon', iconName);
+  return path.join(__dirname, '..', 'Icon', 'mattermost.ico');
 }
 
 function createWindow() {
